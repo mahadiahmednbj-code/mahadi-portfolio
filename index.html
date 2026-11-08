@@ -11,15 +11,24 @@
         
         /* Dashboard Layout */
         .dashboard-container { display: flex; min-height: 100vh; }
-        .sidebar { width: 260px; background: #0b0f19; border-right: 1px solid #1f2937; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; position: fixed; height: 100vh; }
+        .sidebar { width: 260px; background: #0b0f19; border-right: 1px solid #1f2937; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; position: fixed; height: 100vh; overflow-y: auto; }
         .sidebar img { width: 110px; height: 110px; border-radius: 50%; border: 3px solid #00f2fe; object-fit: cover; margin-bottom: 15px; box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
         .sidebar h2 { font-size: 1.2rem; color: #fff; text-align: center; margin-bottom: 5px; }
-        .sidebar p { font-size: 0.85rem; color: #38bdf8; text-align: center; margin-bottom: 30px; }
-        .nav-links { width: 100%; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .sidebar p { font-size: 0.85rem; color: #38bdf8; text-align: center; margin-bottom: 20px; }
+        .linkedin-btn { display: inline-block; background: #0a66c2; color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; margin-bottom: 25px; transition: 0.3s; }
+        .linkedin-btn:hover { background: #084e96; }
+
+        .nav-links { width: 100%; list-style: none; display: flex; flex-direction: column; gap: 8px; }
         .nav-links a { display: block; padding: 10px 15px; background: #111827; color: #9ca3af; border-radius: 8px; text-align: center; font-size: 0.9rem; transition: 0.3s; border: 1px solid #1f2937; }
         .nav-links a:hover { background: #00f2fe; color: #07090e; font-weight: bold; }
 
         .main-content { margin-left: 260px; flex: 1; padding: 40px; max-width: 1200px; }
+
+        /* Stats Overview Cards */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: #111827; border: 1px solid #1f2937; padding: 20px; border-radius: 12px; text-align: center; }
+        .stat-card h3 { font-size: 1.8rem; color: #00f2fe; margin-bottom: 5px; }
+        .stat-card p { font-size: 0.85rem; color: #9ca3af; }
 
         /* Hero Card */
         .hero-card { background: linear-gradient(135deg, #111827 0%, #0b0f19 100%); border: 1px solid #1f2937; padding: 40px; border-radius: 16px; text-align: center; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
@@ -34,7 +43,7 @@
         .card { background: #111827; padding: 25px; border-radius: 12px; border: 1px solid #1f2937; }
 
         /* Services Grid */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
         .service-card { background: #111827; padding: 20px; border-radius: 10px; border: 1px solid #1f2937; text-align: center; transition: 0.3s; }
         .service-card:hover { border-color: #00f2fe; transform: translateY(-4px); }
         .service-card h3 { color: #f3f4f6; margin-bottom: 8px; font-size: 1.1rem; }
@@ -91,6 +100,7 @@
             <img src="profile.jpg" alt="Ferdus Alom Mahadi" onerror="this.src='https://via.placeholder.com/110'">
             <h2>Ferdus Alom Mahadi</h2>
             <p>Digital Creator & Specialist</p>
+            <a href="https://www.linkedin.com/in/ferdus-alom-mahadi-40a1ab44a" target="_blank" class="linkedin-btn">🔗 LinkedIn Profile</a>
             <ul class="nav-links">
                 <li><a href="#about">About Me</a></li>
                 <li><a href="#services">Services</a></li>
@@ -102,6 +112,22 @@
 
         <!-- Main Dashboard Content -->
         <div class="main-content">
+            <!-- Stats Overview Dashboard Header -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 id="visitorCount">1,240</h3>
+                    <p>Total Website Visitors</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="totalReviewsCount">0</h3>
+                    <p>Client Reviews</p>
+                </div>
+                <div class="stat-card">
+                    <h3>100%</h3>
+                    <p>Dedication & Quality</p>
+                </div>
+            </div>
+
             <!-- Hero Card -->
             <div class="hero-card">
                 <h1>LET'S IMPROVE OURSELVES</h1>
@@ -114,7 +140,7 @@
                 <h2 class="section-title">About Me</h2>
                 <div class="card">
                     <p>Welcome! I am <strong>Ferdus Alom Mahadi</strong>, a passionate Digital Creator and Freelance Specialist dedicated to delivering top-tier digital solutions. I believe in continuous growth, precision, and building long-term working relationships with every client.</p>
-                    <p style="margin-top: 10px;">With expertise ranging from high-converting video editing to meticulous data management, I bring creativity and technical efficiency to every project.</p>
+                    <p style="margin-top: 10px;">With expertise ranging from video editing, YouTube SEO, and thumbnail creation to meticulous data management, I bring creativity and technical efficiency to every project.</p>
                     <div style="margin-top: 15px; color: #38bdf8; font-size: 0.95rem;">
                         ✉ Email: <strong>ferdusalommahadi@gmail.com</strong> | 📞 WhatsApp: <strong>01617321349</strong>
                     </div>
@@ -130,12 +156,16 @@
                         <p>Professional video editing for YouTube and brand storytelling.</p>
                     </div>
                     <div class="service-card">
+                        <h3>📈 YouTube SEO</h3>
+                        <p>Optimize videos for higher rankings, CTR, and channel growth.</p>
+                    </div>
+                    <div class="service-card">
                         <h3>📱 Short Video</h3>
-                        <p>Engaging reels, Shorts, and TikToks for high retention.</p>
+                        <p>Engaging reels, Shorts, and TikToks for high viewer retention.</p>
                     </div>
                     <div class="service-card">
                         <h3>🎨 Thumbnails</h3>
-                        <p>Eye-catching custom designs to boost CTR and views.</p>
+                        <p>Eye-catching custom thumbnail designs to boost clicks.</p>
                     </div>
                     <div class="service-card">
                         <h3>📊 Data Entry</h3>
@@ -148,14 +178,14 @@
             <div class="section" id="analyzer">
                 <h2 class="section-title">Project Requirement Analyzer & Inquiry</h2>
                 <div class="card">
-                    <p style="color: #9ca3af; margin-bottom: 20px; font-size: 0.9rem;">Submit your project requirements below. This inquiry will be sent directly to <strong>ferdusalommahadi@gmail.com</strong> so I can review and reply to you quickly.</p>
-                    <!-- Form using Formspree to route directly to your email -->
+                    <p style="color: #9ca3af; margin-bottom: 20px; font-size: 0.9rem;">Submit your project requirements and your email below so I can review and reply directly to your inbox at <strong>ferdusalommahadi@gmail.com</strong>.</p>
                     <form class="analyzer-form" action="https://formspree.io/f/ferdusalommahadi@gmail.com" method="POST">
                         <input type="text" name="client_name" placeholder="Your Name" required>
                         <input type="email" name="client_email" placeholder="Your Email (for reply)" required>
                         <select name="service_type" required>
                             <option value="">Select Service Needed</option>
                             <option value="Video Editing">Video Editing</option>
+                            <option value="YouTube SEO">YouTube SEO</option>
                             <option value="Short Video / Reels">Short Video / Reels</option>
                             <option value="Thumbnail Design">Thumbnail Design</option>
                             <option value="Data Entry">Data Entry</option>
@@ -179,19 +209,19 @@
                 <div id="faq-container">
                     <div class="faq-item">
                         <button class="faq-question">1. What services do you offer? <span>+</span></button>
-                        <div class="faq-answer">I specialize in professional video editing, short-form reels, eye-catching thumbnails, and accurate data entry.</div>
+                        <div class="faq-answer">I specialize in professional video editing, YouTube SEO, short-form reels, eye-catching thumbnails, and accurate data entry.</div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question">2. How long does a project take? <span>+</span></button>
+                        <button class="faq-question">2. How does YouTube SEO help my channel? <span>+</span></button>
+                        <div class="faq-answer">YouTube SEO optimizes your titles, descriptions, tags, and CTR to boost search rankings and organic views.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">3. How long does a project take? <span>+</span></button>
                         <div class="faq-answer">Standard projects are typically delivered within 1 to 3 business days depending on complexity.</div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question">3. How can I contact you directly? <span>+</span></button>
+                        <button class="faq-question">4. How can I contact you directly? <span>+</span></button>
                         <div class="faq-answer">You can reach me via email at ferdusalommahadi@gmail.com, WhatsApp at 01617321349, or through the live chat.</div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question">4. Do you offer revisions? <span>+</span></button>
-                        <div class="faq-answer">Yes, necessary revisions are provided to ensure complete client satisfaction.</div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question">5. Are custom project requests accepted? <span>+</span></button>
@@ -232,7 +262,7 @@
                 <span style="cursor:pointer;" onclick="toggleChat()">✕</span>
             </div>
             <div class="chat-messages" id="chatMessages">
-                <div class="msg-bot">Hello! How can I assist you with your project today? Feel free to ask anything!</div>
+                <div class="msg-bot">Hello! Ask me anything about Mahadi's freelancing services, video editing, YouTube SEO, or thumbnails!</div>
             </div>
             <div class="chat-input-area">
                 <input type="text" id="chatInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
@@ -242,6 +272,15 @@
     </div>
 
     <script>
+        // Live Visitor Counter Simulation & Local Storage Stats
+        let visits = localStorage.getItem('site_visitors') || 1240;
+        if (!sessionStorage.getItem('visited')) {
+            visits++;
+            localStorage.setItem('site_visitors', visits);
+            sessionStorage.setItem('visited', 'true');
+        }
+        document.getElementById('visitorCount').textContent = Number(visits).toLocaleString();
+
         // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
@@ -256,12 +295,14 @@
             });
         });
 
-        // Reviews System
+        // Reviews System & Counter Update
         const reviewForm = document.getElementById('reviewForm');
         const reviewsList = document.getElementById('reviewsList');
+        const totalReviewsCount = document.getElementById('totalReviewsCount');
 
         function loadReviews() {
-            const saved = JSON.parse(localStorage.getItem('dashboard_reviews') || '[]');
+            const saved = JSON.parse(localStorage.getItem('dashboard_reviews_en') || '[]');
+            totalReviewsCount.textContent = saved.length;
             reviewsList.innerHTML = saved.length === 0 ? '<p style="color:#6b7280; text-align:center; font-size:0.85rem;">No reviews yet. Be the first to review!</p>' : '';
             saved.forEach(r => {
                 const div = document.createElement('div');
@@ -277,9 +318,9 @@
             const score = document.getElementById('reviewScore').value;
             const text = document.getElementById('reviewText').value;
 
-            const reviews = JSON.parse(localStorage.getItem('dashboard_reviews') || '[]');
+            const reviews = JSON.parse(localStorage.getItem('dashboard_reviews_en') || '[]');
             reviews.unshift({ name, score, text });
-            localStorage.setItem('dashboard_reviews', JSON.stringify(reviews));
+            localStorage.setItem('dashboard_reviews_en', JSON.stringify(reviews));
 
             reviewForm.reset();
             loadReviews();
@@ -292,7 +333,7 @@
             box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
         }
 
-        // Smart AI Chat Logic with WhatsApp Info at the end
+        // Smart Freelance AI Chat Logic with Out-of-Scope Handling
         function handleKeyPress(e) {
             if (e.key === 'Enter') sendChatMessage();
         }
@@ -313,28 +354,34 @@
             input.value = '';
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
-            // Advanced Smart AI Response simulation
             setTimeout(() => {
                 const botMsg = document.createElement('div');
                 botMsg.className = 'msg-bot';
                 
                 const lowerMsg = msg.toLowerCase();
                 if(lowerMsg.includes('price') || lowerMsg.includes('cost') || lowerMsg.includes('budget')) {
-                    botMsg.textContent = "Pricing depends on project scale and requirements. You can fill out our Project Analyzer form above or message directly on WhatsApp for a quick quote!";
+                    botMsg.textContent = "Pricing depends on project requirements and scope. Please fill out our Project Analyzer form or reach out via WhatsApp!";
+                } else if(lowerMsg.includes('edit') || lowerMsg.includes('video') || lowerMsg.includes('shorts') || lowerMsg.includes('reel')) {
+                    botMsg.textContent = "Mahadi offers professional video editing for YouTube, Shorts, and Reels with high retention cuts and engaging effects.";
+                } else if(lowerMsg.includes('thumbnail') || lowerMsg.includes('design')) {
+                    botMsg.textContent = "Custom thumbnail designs are crafted with high CTR strategies and vibrant visual hierarchies to maximize your views.";
+                } else if(lowerMsg.includes('seo') || lowerMsg.includes('youtube')) {
+                    botMsg.textContent = "YouTube SEO services include keyword optimization, title tags, description enhancement, and ranking strategies to grow your channel.";
                 } else if(lowerMsg.includes('hello') || lowerMsg.includes('hi')) {
-                    botMsg.textContent = "Hello! Mahadi is a professional video editor and data specialist. How can we help you today?";
+                    botMsg.textContent = "Hello! How can I help you with video editing, YouTube SEO, or thumbnail design today?";
                 } else {
-                    botMsg.textContent = "Thanks for your message! To discuss this project in detail, please contact Mahadi directly on WhatsApp at 01617321349 or submit the inquiry form.";
+                    // Out of scope handling as requested
+                    botMsg.textContent = "I'm sorry, I don't have information on that. For specific custom projects, please share your details in our Project Analyzer form or contact Mahadi directly.";
                 }
                 
                 messagesDiv.appendChild(botMsg);
 
-                // Append WhatsApp details at the end of conversation turn
-                const waReminder = document.createElement('div');
-                waReminder.className = 'msg-bot';
-                waReminder.style.color = '#38bdf8';
-                waReminder.innerHTML = `📞 Direct WhatsApp: <strong>01617321349</strong><br>✉ Email: <strong>ferdusalommahadi@gmail.com</strong>`;
-                messagesDiv.appendChild(waReminder);
+                // Appending contact details at the end
+                const contactReminder = document.createElement('div');
+                contactReminder.className = 'msg-bot';
+                contactReminder.style.color = '#38bdf8';
+                contactReminder.innerHTML = `Ready to start? Contact Mahadi:<br>📞 WhatsApp: <strong>01617321349</strong><br>✉ Email: <strong>ferdusalommahadi@gmail.com</strong>`;
+                messagesDiv.appendChild(contactReminder);
 
                 messagesDiv.scrollTop = messagesDiv.scrollHeight;
             }, 800);
