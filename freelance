@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahadi Ahmed - Freelance Professional</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0d1117; color: #c9d1d9; line-height: 1.6; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Hero Section */
+        .hero { display: flex; align-items: center; justify-content: space-between; padding: 60px 0; gap: 40px; flex-wrap: wrap-reverse; }
+        .hero-text { flex: 1; min-width: 300px; }
+        .hero-text h1 { font-size: 3rem; color: #58a6ff; font-weight: 800; line-height: 1.2; text-transform: uppercase; margin-bottom: 15px; }
+        .hero-text p.tagline { font-size: 1.2rem; color: #8b949e; margin-bottom: 25px; font-style: italic; border-left: 3px solid #00ffcc; padding-left: 12px; }
+        .hero-img { flex: 1; display: flex; justify-content: center; min-width: 280px; }
+        .hero-img img { width: 280px; height: 280px; border-radius: 50%; object-fit: cover; border: 4px solid #00ffcc; box-shadow: 0 0 25px rgba(0, 255, 204, 0.3); }
+        
+        /* Section Styles */
+        h2.section-title { font-size: 2rem; color: #00ffcc; text-align: center; margin: 50px 0 25px; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
+        
+        /* About Us Section */
+        .about-card { background: #161b22; padding: 30px; border-radius: 12px; border: 1px solid #30363d; }
+        .about-card p { margin-bottom: 15px; font-size: 1.05rem; color: #e6edf3; }
+        
+        /* Services Section */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .service-card { background: #161b22; padding: 20px; border-radius: 10px; border: 1px solid #30363d; text-align: center; transition: 0.3s; }
+        .service-card:hover { border-color: #00ffcc; transform: translateY(-5px); }
+        .service-card h3 { color: #58a6ff; margin-bottom: 10px; }
+
+        /* Video Showcase Grid */
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .video-card { background: #161b22; border-radius: 10px; padding: 12px; border: 1px solid #30363d; text-align: center; }
+        iframe { width: 100%; height: 210px; border-radius: 8px; border: none; }
+
+        /* Buttons & Floating Chat */
+        .yt-btn { display: inline-block; padding: 12px 25px; background: #FF0000; color: #fff; font-weight: bold; text-decoration: none; border-radius: 30px; margin-top: 10px; }
+        .chat-buttons { position: fixed; bottom: 25px; right: 25px; z-index: 100; }
+        .wa-btn { background: #25D366; color: white; padding: 14px 24px; text-decoration: none; border-radius: 50px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.5); font-size: 15px; display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-text">
+                <h1>LET'S IMPROVE OURSELVES</h1>
+                <p class="tagline">"One Project to Earn Your Trust, Exceptional Quality to Keep It for a Lifetime."</p>
+                <a href="https://www.youtube.com/@Wonder_Learn1" target="_blank" class="yt-btn">▶ Visit YouTube Channel</a>
+            </div>
+            <div class="hero-img">
+                <!-- এখানে আপনার ছবির নাম দেবেন -->
+                <img src="profile.jpg" alt="Mahadi Ahmed">
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <h2 class="section-title">About Me</h2>
+        <div class="about-card">
+            <p>Welcome! I am <strong>Mahadi Ahmed</strong>, a passionate Digital Creator and Freelance Specialist dedicated to delivering top-tier digital solutions. I believe in continuous growth, precision, and building long-term working relationships with every client.</p>
+            <p>With expertise ranging from high-converting video editing to meticulous data management, I bring creativity and technical efficiency to every project I touch.</p>
+        </div>
+
+        <!-- Services Offered -->
+        <h2 class="section-title">My Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>🎬 Video Editing</h3>
+                <p>Professional video editing for YouTube, promo videos, and brand storytelling.</p>
+            </div>
+            <div class="service-card">
+                <h3>⚡ Anime & Short Content</h3>
+                <p>Engaging anime shorts, reels, and TikToks designed for high viewer retention.</p>
+            </div>
+            <div class="service-card">
+                <h3>🎨 Thumbnail Design</h3>
+                <p>Eye-catching custom thumbnails to boost your video CTR and views.</p>
+            </div>
+            <div class="service-card">
+                <h3>📊 Data Entry</h3>
+                <p>Accurate, clean, and organized data entry services with 100% precision.</p>
+            </div>
+        </div>
+
+        <!-- Featured Video Showcase -->
+        <h2 class="section-title">Featured Works</h2>
+        <div class="video-grid">
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+                <p style="margin-top: 10px; font-weight: 500;">Anime Short Editing</p>
+            </div>
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+                <p style="margin-top: 10px; font-weight: 500;">YouTube Video Edit</p>
+            </div>
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+                <p style="margin-top: 10px; font-weight: 500;">Creative Work Sample</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="chat-buttons">
+        <a href="https://wa.me/8801617321349?text=Hello%20Mahadi,%20I%20want%20to%20discuss%20a%20project" target="_blank" class="wa-btn">💬 Chat on WhatsApp</a>
+    </div>
+
+</body>
+</html>
