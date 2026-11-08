@@ -1,205 +1,248 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ferdus Alom Mahadi - Portfolio</title>
+    <title>Ferdus Alom Mahadi - Professional Dashboard</title>
     <style>
-        /* Base Styling */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0b0f19; color: #e2e8f0; line-height: 1.6; padding-bottom: 50px; }
+        body { background-color: #07090e; color: #e2e8f0; line-height: 1.6; padding-bottom: 50px; }
         a { color: #00f2fe; text-decoration: none; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        
+        /* Dashboard Layout */
+        .dashboard-container { display: flex; min-height: 100vh; }
+        .sidebar { width: 260px; background: #0b0f19; border-right: 1px solid #1f2937; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; position: fixed; height: 100vh; }
+        .sidebar img { width: 110px; height: 110px; border-radius: 50%; border: 3px solid #00f2fe; object-fit: cover; margin-bottom: 15px; box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
+        .sidebar h2 { font-size: 1.2rem; color: #fff; text-align: center; margin-bottom: 5px; }
+        .sidebar p { font-size: 0.85rem; color: #38bdf8; text-align: center; margin-bottom: 30px; }
+        .nav-links { width: 100%; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .nav-links a { display: block; padding: 10px 15px; background: #111827; color: #9ca3af; border-radius: 8px; text-align: center; font-size: 0.9rem; transition: 0.3s; border: 1px solid #1f2937; }
+        .nav-links a:hover { background: #00f2fe; color: #07090e; font-weight: bold; }
 
-        /* Hero */
-        .hero { text-align: center; padding: 60px 20px; background: linear-gradient(180deg, #111827 0%, #0b0f19 100%); border-bottom: 1px solid #1f2937; }
-        .profile-img { width: 160px; height: 160px; border-radius: 50%; border: 4px solid #00f2fe; object-fit: cover; margin-bottom: 20px; box-shadow: 0 0 20px rgba(0, 242, 254, 0.3); }
-        .hero h1 { font-size: 2.5rem; color: #ffffff; margin-bottom: 10px; }
-        .hero p.tagline { font-size: 1.1rem; color: #9ca3af; max-width: 600px; margin: 0 auto 20px; }
-        .btn-yt { display: inline-block; background-color: #ff0000; color: #fff; padding: 12px 25px; border-radius: 30px; font-weight: bold; margin-top: 10px; transition: 0.3s; }
-        .btn-yt:hover { background-color: #cc0000; transform: translateY(-2px); }
+        .main-content { margin-left: 260px; flex: 1; padding: 40px; max-width: 1200px; }
+
+        /* Hero Card */
+        .hero-card { background: linear-gradient(135deg, #111827 0%, #0b0f19 100%); border: 1px solid #1f2937; padding: 40px; border-radius: 16px; text-align: center; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .hero-card h1 { font-size: 2.2rem; color: #ffffff; margin-bottom: 10px; }
+        .hero-card p { font-size: 1rem; color: #9ca3af; margin-bottom: 20px; }
+        .btn-yt { display: inline-block; background-color: #ff0000; color: #fff; padding: 10px 22px; border-radius: 25px; font-weight: bold; font-size: 0.9rem; transition: 0.3s; }
+        .btn-yt:hover { background-color: #cc0000; }
 
         /* Sections */
-        .section { margin: 50px 0; }
-        .section-title { font-size: 1.8rem; color: #00f2fe; text-align: center; margin-bottom: 30px; position: relative; }
-        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: #00f2fe; margin: 8px auto 0; border-radius: 2px; }
-
-        /* Card & Contact */
-        .card { background: #111827; padding: 30px; border-radius: 12px; border: 1px solid #1f2937; margin-bottom: 20px; }
-        .contact-info { margin-top: 15px; font-size: 1rem; color: #38bdf8; }
+        .section { margin-bottom: 40px; }
+        .section-title { font-size: 1.5rem; color: #00f2fe; margin-bottom: 20px; border-bottom: 2px solid #1f2937; padding-bottom: 8px; }
+        .card { background: #111827; padding: 25px; border-radius: 12px; border: 1px solid #1f2937; }
 
         /* Services Grid */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
         .service-card { background: #111827; padding: 20px; border-radius: 10px; border: 1px solid #1f2937; text-align: center; transition: 0.3s; }
-        .service-card:hover { border-color: #00f2fe; transform: translateY(-5px); }
-        .service-card h3 { color: #f3f4f6; margin-bottom: 10px; font-size: 1.2rem; }
-        .service-card p { font-size: 0.9rem; color: #9ca3af; }
+        .service-card:hover { border-color: #00f2fe; transform: translateY(-4px); }
+        .service-card h3 { color: #f3f4f6; margin-bottom: 8px; font-size: 1.1rem; }
+        .service-card p { font-size: 0.85rem; color: #9ca3af; }
+
+        /* Project Analyzer & Inquiry Form */
+        .analyzer-form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .analyzer-form input, .analyzer-form select, .analyzer-form textarea { background: #1f2937; border: 1px solid #374151; color: #fff; padding: 12px; border-radius: 8px; outline: none; width: 100%; font-size: 0.9rem; }
+        .analyzer-form textarea { grid-column: span 2; }
+        .analyzer-form button { grid-column: span 2; background: #00f2fe; color: #07090e; padding: 12px; border: none; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .analyzer-form button:hover { background: #00d2df; }
 
         /* FAQ Accordion */
         .faq-item { background: #111827; border: 1px solid #1f2937; border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
-        .faq-question { width: 100%; text-align: left; padding: 15px 20px; background: none; border: none; color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .faq-answer { padding: 0 20px 15px; color: #9ca3af; display: none; font-size: 0.95rem; }
+        .faq-question { width: 100%; text-align: left; padding: 14px 18px; background: none; border: none; color: #fff; font-size: 0.95rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { padding: 0 18px 14px; color: #9ca3af; display: none; font-size: 0.9rem; }
 
-        /* Public Review Section */
-        .review-form { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
-        .review-form input, .review-form textarea, .review-form select { background: #1f2937; border: 1px solid #374151; color: #fff; padding: 12px; border-radius: 6px; outline: none; }
-        .review-form button { background: #00f2fe; color: #0b0f19; padding: 12px; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; }
-        .reviews-list { display: flex; flex-direction: column; gap: 15px; }
-        .review-card { background: #111827; border: 1px solid #1f2937; padding: 15px; border-radius: 8px; }
-        .review-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        /* Public Reviews */
+        .review-form { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+        .review-form input, .review-form textarea, .review-form select { background: #1f2937; border: 1px solid #374151; color: #fff; padding: 10px; border-radius: 6px; outline: none; }
+        .review-form button { background: #00f2fe; color: #07090e; padding: 10px; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; }
+        .reviews-list { display: flex; flex-direction: column; gap: 12px; }
+        .review-card { background: #192231; border: 1px solid #2d3748; padding: 12px 15px; border-radius: 8px; }
+        .review-header { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9rem; }
         .review-name { font-weight: bold; color: #fff; }
         .review-score { color: #f59e0b; font-weight: bold; }
 
-        /* Private Live Chat Widget */
-        .chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-        .chat-toggle { background: #00f2fe; color: #0b0f19; border: none; padding: 14px 20px; border-radius: 30px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
-        .chat-box { display: none; width: 300px; height: 380px; background: #111827; border: 1px solid #374151; border-radius: 12px; position: absolute; bottom: 60px; right: 0; flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-        .chat-header { background: #1f2937; padding: 12px; font-weight: bold; border-top-left-radius: 12px; border-top-right-radius: 12px; display: flex; justify-content: space-between; }
-        .chat-messages { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; }
-        .msg-system { background: #1f2937; color: #9ca3af; padding: 8px; border-radius: 6px; align-self: flex-start; }
-        .msg-user { background: #00f2fe; color: #0b0f19; padding: 8px; border-radius: 6px; align-self: flex-end; }
-        .chat-input { display: flex; padding: 10px; border-top: 1px solid #374151; }
-        .chat-input input { flex: 1; background: #1f2937; border: none; padding: 8px; color: #fff; border-radius: 4px; outline: none; }
-        .chat-input button { background: #00f2fe; border: none; padding: 8px 12px; margin-left: 5px; color: #0b0f19; font-weight: bold; border-radius: 4px; cursor: pointer; }
+        /* Live Smart AI Chat Widget */
+        .chat-widget { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
+        .chat-toggle { background: #00f2fe; color: #07090e; border: none; padding: 14px 22px; border-radius: 30px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 20px rgba(0, 242, 254, 0.4); display: flex; align-items: center; gap: 8px; }
+        .chat-box { display: none; width: 320px; height: 420px; background: #111827; border: 1px solid #374151; border-radius: 12px; position: absolute; bottom: 65px; right: 0; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.6); overflow: hidden; }
+        .chat-header { background: #1f2937; padding: 12px 15px; font-weight: bold; display: flex; justify-content: space-between; color: #00f2fe; font-size: 0.95rem; }
+        .chat-messages { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem; }
+        .msg-bot { background: #1f2937; color: #cbd5e1; padding: 8px 12px; border-radius: 8px; align-self: flex-start; max-width: 85%; }
+        .msg-user { background: #00f2fe; color: #07090e; padding: 8px 12px; border-radius: 8px; align-self: flex-end; max-width: 85%; font-weight: 500; }
+        .chat-input-area { display: flex; padding: 10px; border-top: 1px solid #374151; background: #0b0f19; }
+        .chat-input-area input { flex: 1; background: #1f2937; border: none; padding: 8px 10px; color: #fff; border-radius: 6px; outline: none; font-size: 0.85rem; }
+        .chat-input-area button { background: #00f2fe; border: none; padding: 8px 14px; margin-left: 6px; color: #07090e; font-weight: bold; border-radius: 6px; cursor: pointer; }
+
+        @media(max-width: 768px) {
+            .dashboard-container { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: relative; }
+            .main-content { margin-left: 0; padding: 20px; }
+            .analyzer-form { grid-template-columns: 1fr; }
+            .analyzer-form textarea, .analyzer-form button { grid-column: span 1; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Hero Section -->
-    <div class="hero">
-        <img src="profile.jpg" alt="Ferdus Alom Mahadi" class="profile-img" onerror="this.src='https://via.placeholder.com/160'">
-        <h1>LET'S IMPROVE OURSELVES</h1>
-        <p class="tagline">"One Project to Earn Your Trust, Exceptional Quality to Keep It for a Lifetime."</p>
-        <a href="https://youtube.com" target="_blank" class="btn-yt">▶ Visit YouTube Channel</a>
+    <div class="dashboard-container">
+        <!-- Sidebar Dashboard Menu -->
+        <div class="sidebar">
+            <img src="profile.jpg" alt="Ferdus Alom Mahadi" onerror="this.src='https://via.placeholder.com/110'">
+            <h2>Ferdus Alom Mahadi</h2>
+            <p>Digital Creator & Specialist</p>
+            <ul class="nav-links">
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#analyzer">Project Analyzer</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#reviews">Client Reviews</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Dashboard Content -->
+        <div class="main-content">
+            <!-- Hero Card -->
+            <div class="hero-card">
+                <h1>LET'S IMPROVE OURSELVES</h1>
+                <p>"One Project to Earn Your Trust, Exceptional Quality to Keep It for a Lifetime."</p>
+                <a href="https://youtube.com" target="_blank" class="btn-yt">▶ Visit YouTube Channel</a>
+            </div>
+
+            <!-- About Me -->
+            <div class="section" id="about">
+                <h2 class="section-title">About Me</h2>
+                <div class="card">
+                    <p>Welcome! I am <strong>Ferdus Alom Mahadi</strong>, a passionate Digital Creator and Freelance Specialist dedicated to delivering top-tier digital solutions. I believe in continuous growth, precision, and building long-term working relationships with every client.</p>
+                    <p style="margin-top: 10px;">With expertise ranging from high-converting video editing to meticulous data management, I bring creativity and technical efficiency to every project.</p>
+                    <div style="margin-top: 15px; color: #38bdf8; font-size: 0.95rem;">
+                        ✉ Email: <strong>ferdusalommahadi@gmail.com</strong> | 📞 WhatsApp: <strong>01617321349</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services -->
+            <div class="section" id="services">
+                <h2 class="section-title">My Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>🎬 Video Editing</h3>
+                        <p>Professional video editing for YouTube and brand storytelling.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>📱 Short Video</h3>
+                        <p>Engaging reels, Shorts, and TikToks for high retention.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>🎨 Thumbnails</h3>
+                        <p>Eye-catching custom designs to boost CTR and views.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>📊 Data Entry</h3>
+                        <p>Accurate, clean, and organized professional data services.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Analyzer & Inquiry Form -->
+            <div class="section" id="analyzer">
+                <h2 class="section-title">Project Requirement Analyzer & Inquiry</h2>
+                <div class="card">
+                    <p style="color: #9ca3af; margin-bottom: 20px; font-size: 0.9rem;">Submit your project requirements below. This inquiry will be sent directly to <strong>ferdusalommahadi@gmail.com</strong> so I can review and reply to you quickly.</p>
+                    <!-- Form using Formspree to route directly to your email -->
+                    <form class="analyzer-form" action="https://formspree.io/f/ferdusalommahadi@gmail.com" method="POST">
+                        <input type="text" name="client_name" placeholder="Your Name" required>
+                        <input type="email" name="client_email" placeholder="Your Email (for reply)" required>
+                        <select name="service_type" required>
+                            <option value="">Select Service Needed</option>
+                            <option value="Video Editing">Video Editing</option>
+                            <option value="Short Video / Reels">Short Video / Reels</option>
+                            <option value="Thumbnail Design">Thumbnail Design</option>
+                            <option value="Data Entry">Data Entry</option>
+                            <option value="Custom Project">Custom Project</option>
+                        </select>
+                        <select name="budget_range" required>
+                            <option value="">Select Estimated Budget</option>
+                            <option value="Under $50">Under $50</option>
+                            <option value="$50 - $200">$50 - $200</option>
+                            <option value="$200+">$200+</option>
+                        </select>
+                        <textarea name="project_details" rows="4" placeholder="Analyze your project goals, timeline, and exact requirements here..." required></textarea>
+                        <button type="submit">Analyze & Send to Mahadi's Email</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="section" id="faq">
+                <h2 class="section-title">Frequently Asked Questions (FAQ)</h2>
+                <div id="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question">1. What services do you offer? <span>+</span></button>
+                        <div class="faq-answer">I specialize in professional video editing, short-form reels, eye-catching thumbnails, and accurate data entry.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">2. How long does a project take? <span>+</span></button>
+                        <div class="faq-answer">Standard projects are typically delivered within 1 to 3 business days depending on complexity.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">3. How can I contact you directly? <span>+</span></button>
+                        <div class="faq-answer">You can reach me via email at ferdusalommahadi@gmail.com, WhatsApp at 01617321349, or through the live chat.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">4. Do you offer revisions? <span>+</span></button>
+                        <div class="faq-answer">Yes, necessary revisions are provided to ensure complete client satisfaction.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">5. Are custom project requests accepted? <span>+</span></button>
+                        <div class="faq-answer">Yes, custom orders tailored specifically to your unique project requirements are warmly welcomed.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Public Reviews -->
+            <div class="section" id="reviews">
+                <h2 class="section-title">Client Reviews & Ratings</h2>
+                <div class="card">
+                    <form class="review-form" id="reviewForm">
+                        <input type="text" id="reviewerName" placeholder="Your Name" required>
+                        <select id="reviewScore" required>
+                            <option value="">Select Rating (0/10)</option>
+                            <option value="10/10 ⭐⭐⭐⭐⭐">10/10 - Exceptional</option>
+                            <option value="9/10 ⭐⭐⭐⭐">9/10 - Very Good</option>
+                            <option value="8/10 ⭐⭐⭐⭐">8/10 - Good</option>
+                            <option value="7/10 ⭐⭐⭐">7/10 - Average</option>
+                            <option value="0/10 ❌">0/10 - Poor</option>
+                        </select>
+                        <textarea id="reviewText" rows="2" placeholder="Write your review or feedback..." required></textarea>
+                        <button type="submit">Submit Public Review</button>
+                    </form>
+                    <div class="reviews-list" id="reviewsList"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="container">
-        <!-- About Me Section -->
-        <div class="section">
-            <h2 class="section-title">About Me</h2>
-            <div class="card">
-                <p>Welcome! I am <strong>Ferdus Alom Mahadi</strong>, a passionate Digital Creator and Freelance Specialist dedicated to delivering top-tier digital solutions. I believe in continuous growth, precision, and building long-term working relationships with every client.</p>
-                <p style="margin-top: 10px;">With expertise ranging from high-converting video editing to meticulous data management, I bring creativity and technical efficiency to every project I touch.</p>
-                <div class="contact-info">
-                    ✉ Email: <strong>ferdusalommahadi@gmail.com</strong>
-                </div>
-            </div>
-        </div>
-
-        <!-- My Services Section -->
-        <div class="section">
-            <h2 class="section-title">My Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>🎬 Video Editing</h3>
-                    <p>Professional video editing for YouTube videos, promo videos, and brand storytelling.</p>
-                </div>
-                <div class="service-card">
-                    <h3>📱 Short Video Editing</h3>
-                    <p>Engaging reels, Shorts, and TikToks designed for maximum retention and reach.</p>
-                </div>
-                <div class="service-card">
-                    <h3>🎨 Thumbnail Design</h3>
-                    <p>Eye-catching custom thumbnails to boost your video CTR and view counts.</p>
-                </div>
-                <div class="service-card">
-                    <h3>📊 Data Entry</h3>
-                    <p>Accurate, clean, and organized data entry services with 100% precision.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- FAQ Section (10 Common Q&A) -->
-        <div class="section">
-            <h2 class="section-title">Frequently Asked Questions (FAQ)</h2>
-            <div id="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">১. আপনি কী কী ধরনের কাজ করেন? <span>+</span></button>
-                    <div class="faq-answer">আমি ভিডিও এডিটিং (ইউটিউব, শর্টস, রিলস), থাম্বনেল ডিজাইন এবং ডাটা এন্ট্রির কাজ করে থাকি।</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">২. কাজ সম্পূর্ণ করতে কত সময় লাগে? <span>+</span></button>
-                    <div class="faq-answer">প্রজেক্টের সাইজ অনুযায়ী সময় নির্ধারণ করা হয়। সাধারণত ১-৩ দিনের মধ্যে ডেলিভারি দেওয়া হয়।</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">৩. আমি কিভাবে কাজের জন্য অর্ডার বা যোগাযোগ করতে পারি? <span>+</span></button>
-                    <div class="faq-answer">আপনি সরাসরি ইমেইলে (ferdusalommahadi@gmail.com) অথবা ওয়েবসাইটের প্রাইভেট চ্যাট অপশন দিয়ে যোগাযোগ করতে পারেন।</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">৪. কাজের কোয়ালিটি কেমন হবে? <span>+</span></button>
-                    <div class="faq-answer">আমি সর্বোচ্চ কোয়ালিটি ও ১০০% নিখুঁত কাজ নিশ্চিত করি যেন দীর্ঘমেয়াদী পেশাদার সম্পর্ক তৈরি হয়।</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">৫. প্রজেক্টের রিভিশন বা সংশোধনের সুবিধা আছে কি? <span>+</span></button>
-                    <div class="faq-answer">হ্যাঁ, কাজ পছন্দ না হওয়া পর্যন্ত প্রয়োজনীয় রিভিশন সুবিধা দেওয়া হয়।</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">৬. থাম্বনেল ডিজাইনের ক্ষেত্রে কোন বিষয়গুলো খেয়াল রাখা হয়? <span>+</span></button>
-                    <div class="faq-answer">উচ্চ ক্লিক থ্রু রেট (CTR), আকর্ষণীয় কালার কম্বিনেশন এবং স্পষ্ট টেক্সট ব্যবহারের ওপর নজর দেওয়া হয়।</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">৭. ডাটা এন্ট্রির কাজে তথ্যের সুরক্ষা কেমন থাকবে? <span>+</span></button>
-                    <div class="faq-answer">আপনার সমস্ত ডাটা ও গোপনীয়তা ১০০% সুরক্ষিত রাখা হবে।</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">৮. শর্ট ভিডিওর ক্ষেত্রে কী ধরনের এডিটিং করেন? <span>+</span></button>
-                    <div class="faq-answer">ক্যাপশন, সাউন্ড ইফেক্ট, মোশন গ্রাফিক্স এবং এনগেজিং ট্রানজিশন ব্যবহার করে ভিডিও তৈরি করা হয়।</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">৯. পেমেন্ট মেথড বা টাকা প্রদান কীভাবে করা যাবে? <span>+</span></button>
-                    <div class="faq-answer">আলোচনা সাপেক্ষে সুবিধাজনক লোকাল বা ইন্টারন্যাশনাল পেমেন্ট মেথড ব্যবহার করা যাবে।</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">১০. আপনি কি কাস্টম কোনো কাজের রিকোয়েস্ট গ্রহণ করেন? <span>+</span></button>
-                    <div class="faq-answer">হ্যাঁ, আপনার পছন্দ ও প্রয়োজন অনুযায়ী কাস্টম যেকোনো ভিডিও বা ডাটা প্রজেক্ট গ্রহণ করা হয়।</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Public Reviews Section -->
-        <div class="section">
-            <h2 class="section-title">Client Reviews & Rating</h2>
-            <div class="card">
-                <form class="review-form" id="reviewForm">
-                    <input type="text" id="reviewerName" placeholder="আপনার নাম" required>
-                    <select id="reviewScore" required>
-                        <option value="">রেটিং নির্বাচন করুন (০/১০)</option>
-                        <option value="10/10 ⭐⭐⭐⭐⭐">10/10 - অসাধারণ</option>
-                        <option value="9/10 ⭐⭐⭐⭐">9/10 - খুব ভালো</option>
-                        <option value="8/10 ⭐⭐⭐⭐">8/10 - ভালো</option>
-                        <option value="7/10 ⭐⭐⭐">7/10 - মোটামু্টি</option>
-                        <option value="5/10 ⭐⭐">5/10 - সাধারণ</option>
-                        <option value="0/10 ❌">0/10 - খারাপ</option>
-                    </select>
-                    <textarea id="reviewText" rows="3" placeholder="আপনার মতামত বা অভিজ্ঞতা লিখুন..." required></textarea>
-                    <button type="submit">রিভিউ পোস্ট করুন (পাবলিক)</button>
-                </form>
-
-                <div class="reviews-list" id="reviewsList"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Private Live Chat Widget -->
+    <!-- Smart AI Live Chat Widget -->
     <div class="chat-widget">
-        <button class="chat-toggle" onclick="toggleChat()">💬 Live Chat</button>
+        <button class="chat-toggle" onclick="toggleChat()">💬 Smart AI Chat</button>
         <div class="chat-box" id="chatBox">
             <div class="chat-header">
-                <span>Private Chat with Mahadi</span>
+                <span>Mahadi's Assistant AI</span>
                 <span style="cursor:pointer;" onclick="toggleChat()">✕</span>
             </div>
             <div class="chat-messages" id="chatMessages">
-                <div class="msg-system">হ্যালো! কীভাবে আপনাকে সাহায্য করতে পারি? মেসেজ লিখুন।</div>
+                <div class="msg-bot">Hello! How can I assist you with your project today? Feel free to ask anything!</div>
             </div>
-            <div class="chat-input">
-                <input type="text" id="chatInput" placeholder="মেসেজ লিখুন...">
-                <button onclick="sendMessage()">পাঠান</button>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+                <button onclick="sendChatMessage()">Send</button>
             </div>
         </div>
     </div>
 
     <script>
-        // FAQ Accordion Toggle
+        // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const answer = button.nextElementSibling;
@@ -213,17 +256,17 @@
             });
         });
 
-        // Reviews Feature (Local Persistence)
+        // Reviews System
         const reviewForm = document.getElementById('reviewForm');
         const reviewsList = document.getElementById('reviewsList');
 
         function loadReviews() {
-            const saved = JSON.parse(localStorage.getItem('site_reviews') || '[]');
-            reviewsList.innerHTML = saved.length === 0 ? '<p style="color:#6b7280; text-align:center;">এখনো কোনো রিভিউ দেওয়া হয়নি। প্রথম রিভিউটি আপনি দিন!</p>' : '';
+            const saved = JSON.parse(localStorage.getItem('dashboard_reviews') || '[]');
+            reviewsList.innerHTML = saved.length === 0 ? '<p style="color:#6b7280; text-align:center; font-size:0.85rem;">No reviews yet. Be the first to review!</p>' : '';
             saved.forEach(r => {
                 const div = document.createElement('div');
                 div.className = 'review-card';
-                div.innerHTML = `<div class="review-header"><span class="review-name">${r.name}</span><span class="review-score">${r.score}</span></div><p style="color:#cbd5e1;">${r.text}</p>`;
+                div.innerHTML = `<div class="review-header"><span class="review-name">${r.name}</span><span class="review-score">${r.score}</span></div><p style="color:#cbd5e1; font-size:0.85rem;">${r.text}</p>`;
                 reviewsList.appendChild(div);
             });
         }
@@ -234,28 +277,34 @@
             const score = document.getElementById('reviewScore').value;
             const text = document.getElementById('reviewText').value;
 
-            const reviews = JSON.parse(localStorage.getItem('site_reviews') || '[]');
+            const reviews = JSON.parse(localStorage.getItem('dashboard_reviews') || '[]');
             reviews.unshift({ name, score, text });
-            localStorage.setItem('site_reviews', JSON.stringify(reviews));
+            localStorage.setItem('dashboard_reviews', JSON.stringify(reviews));
 
             reviewForm.reset();
             loadReviews();
         });
-
         loadReviews();
 
-        // Private Chat Box Toggle & Logic
+        // Chat Toggle
         function toggleChat() {
             const box = document.getElementById('chatBox');
             box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
         }
 
-        function sendMessage() {
+        // Smart AI Chat Logic with WhatsApp Info at the end
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        }
+
+        function sendChatMessage() {
             const input = document.getElementById('chatInput');
             const msg = input.value.trim();
             if (!msg) return;
 
             const messagesDiv = document.getElementById('chatMessages');
+            
+            // User Message
             const userMsg = document.createElement('div');
             userMsg.className = 'msg-user';
             userMsg.textContent = msg;
@@ -264,13 +313,31 @@
             input.value = '';
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
+            // Advanced Smart AI Response simulation
             setTimeout(() => {
-                const reply = document.createElement('div');
-                reply.className = 'msg-system';
-                reply.textContent = "ধন্যবাদ! আপনার মেসেজটি পেয়েছি। শিগগিরই উত্তর দেওয়া হবে।";
-                messagesDiv.appendChild(reply);
+                const botMsg = document.createElement('div');
+                botMsg.className = 'msg-bot';
+                
+                const lowerMsg = msg.toLowerCase();
+                if(lowerMsg.includes('price') || lowerMsg.includes('cost') || lowerMsg.includes('budget')) {
+                    botMsg.textContent = "Pricing depends on project scale and requirements. You can fill out our Project Analyzer form above or message directly on WhatsApp for a quick quote!";
+                } else if(lowerMsg.includes('hello') || lowerMsg.includes('hi')) {
+                    botMsg.textContent = "Hello! Mahadi is a professional video editor and data specialist. How can we help you today?";
+                } else {
+                    botMsg.textContent = "Thanks for your message! To discuss this project in detail, please contact Mahadi directly on WhatsApp at 01617321349 or submit the inquiry form.";
+                }
+                
+                messagesDiv.appendChild(botMsg);
+
+                // Append WhatsApp details at the end of conversation turn
+                const waReminder = document.createElement('div');
+                waReminder.className = 'msg-bot';
+                waReminder.style.color = '#38bdf8';
+                waReminder.innerHTML = `📞 Direct WhatsApp: <strong>01617321349</strong><br>✉ Email: <strong>ferdusalommahadi@gmail.com</strong>`;
+                messagesDiv.appendChild(waReminder);
+
                 messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            }, 1000);
+            }, 800);
         }
     </script>
 </body>
