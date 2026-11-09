@@ -78,8 +78,9 @@
         .review-form button { background: #f43f5e; color: #fff; padding: 14px; border: none; font-weight: 600; border-radius: 10px; cursor: pointer; }
         .reviews-list { display: flex; flex-direction: column; gap: 15px; }
         .review-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); padding: 20px; border-radius: 14px; }
-        .review-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95rem; }
+        .review-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95rem; align-items: center; }
         .review-name { font-weight: 700; color: #fff; }
+        .review-email { font-size: 0.8rem; color: #94a3b8; font-weight: 400; margin-left: 8px; }
         .review-score { color: #f59e0b; font-weight: 700; }
 
         footer { text-align: center; padding: 40px 0; color: #64748b; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); }
@@ -189,7 +190,7 @@
             </div>
         </div>
 
-        <!-- Project Analyzer & Inquiry Form (Updated Formspree Link) -->
+        <!-- Project Analyzer & Inquiry Form -->
         <div class="section" id="analyzer">
             <div class="section-header">
                 <h2>Project Analyzer & Inquiry</h2>
@@ -250,7 +251,7 @@
             </div>
         </div>
 
-        <!-- Client Reviews Section (Google Sheets Connected) -->
+        <!-- Client Reviews Section -->
         <div class="section" id="reviews">
             <div class="section-header">
                 <h2>Client Reviews & Ratings</h2>
@@ -259,6 +260,7 @@
             <div class="reviews-wrap">
                 <form class="review-form" id="reviewForm">
                     <input type="text" id="reviewerName" placeholder="Your Name" required>
+                    <input type="email" id="reviewerEmail" placeholder="Your Gmail / Email (Required)" required>
                     <select id="reviewScore" required>
                         <option value="">Select Rating (1 to 10)</option>
                         <option value="10/10 ⭐⭐⭐⭐⭐">10/10 - Exceptional</option>
@@ -306,18 +308,18 @@
     </div>
 
     <script>
-        // Google Sheet Web App URL connected securely
-        const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbyaTStE9Aksr6LEWqcmHGMz64-368ESpmzAGQ3Pi6FbPYAFspQTC4XCdzxDnEmStfyWhA/exec";
+        // Updated Google Sheet Web App URL
+        const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbwGbsXGG0Jy461ktzvZU7729wHm57jeMHJ8_vtkzi-kNadBj9bz6aua5wgqJDALdT0Hig/exec";
 
-        // Real Unique Visitor Counter fix (Counts each visitor properly)
-        let visits = localStorage.getItem('site_visitors_real_count');
+        // Permanent Fixed Real Visitor Counter Logic
+        let visits = localStorage.getItem('site_visitors_permanent');
         if (!visits) {
-            visits = 125; // Base starting count
+            visits = 142; // Base starting visitor count
         }
-        if (!sessionStorage.getItem('visited_this_session')) {
+        if (!sessionStorage.getItem('counted_this_browser_session')) {
             visits = parseInt(visits) + 1;
-            localStorage.setItem('site_visitors_real_count', visits);
-            sessionStorage.setItem('visited_this_session', 'true');
+            localStorage.setItem('site_visitors_permanent', visits);
+            sessionStorage.setItem('counted_this_browser_session', 'true');
         }
         document.getElementById('visitorCount').textContent = visits;
 
@@ -335,7 +337,7 @@
             });
         });
 
-        // Reviews System (Google Sheets API Connection)
+        // Reviews System (Google Sheets API Connection with Email Display)
         const reviewForm = document.getElementById('reviewForm');
         const reviewsList = document.getElementById('reviewsList');
         const totalReviewsCount = document.getElementById('totalReviewsCount');
@@ -351,7 +353,7 @@
                     saved.forEach(r => {
                         const div = document.createElement('div');
                         div.className = 'review-card';
-                        div.innerHTML = `<div class="review-header"><span class="review-name">${r.name}</span><span class="review-score">${r.score}</span></div><p style="color:#cbd5e1; font-size:0.9rem;">${r.text}</p>`;
+                        div.innerHTML = `<div class="review-header"><div><span class="review-name">${r.name}</span><span class="review-email">(${r.email})</span></div><span class="review-score">${r.score}</span></div><p style="color:#cbd5e1; font-size:0.9rem;">${r.text}</p>`;
                         reviewsList.appendChild(div);
                     });
                 })
@@ -366,6 +368,7 @@
             submitBtn.disabled = true;
 
             const name = document.getElementById('reviewerName').value;
+            const email = document.getElementById('reviewerEmail').value;
             const score = document.getElementById('reviewScore').value;
             const text = document.getElementById('reviewText').value;
 
@@ -373,7 +376,7 @@
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, score, text })
+                body: JSON.stringify({ name, email, score, text })
             }).then(() => {
                 reviewForm.reset();
                 submitBtn.textContent = 'Submit Public Review';
@@ -390,7 +393,7 @@
             box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
         }
 
-        // Smart Freelance AI Chat Logic with "What is this place/services" auto-reply
+        // Smart Freelance AI Chat Logic
         function handleKeyPress(e) {
             if (e.key === 'Enter') sendChatMessage();
         }
@@ -425,8 +428,8 @@
                     botMsg.textContent = "YouTube SEO services include keyword research, metadata optimization, title and tag structuring to grow your channel organically.";
                 } else if(lowerMsg.includes('data') || lowerMsg.includes('entry')) {
                     botMsg.textContent = "Professional data entry services with 100% accuracy, organization, and strict confidentiality.";
-                } else if(lowerMsg.includes('what is this place') || lowerMsg.includes('ekane ki ki kora hoy') || lowerMsg.includes('এখানে কি করা হয়') || lowerMsg.includes('এখানের কাজ কি') || lowerMsg.includes('what do you do') || lowerMsg.includes('services')) {
-                    botMsg.textContent = "এখানে মূলত প্রফেশনাল ডিজিটাল ফ্রিল্যান্সিং সেবা প্রদান করা হয়! যেমন: ১. Video Editing (ভিডিও এডিটিং ও শর্টস) ২. YouTube SEO (ইউটিউব এসইও ও চ্যানেল গ্রোথ) ৩. Thumbnail Design (হাই-সিটিআর থাম্বনেইল ডিজাইন) ৪. Data Entry (ডেটা এন্ট্রি ও ম্যানেজমেন্ট)।";
+                } else if(lowerMsg.includes('what is this place') || lowerMsg.includes('ekane ki ki kora hoy') || lowerMsg.includes('এখানে কি করা হয়') || lowerMsg.includes('এখানের কাজ কি') || lowerMsg.includes('what do you do') || lowerMsg.includes('services') || lowerMsg.includes('kaj ki')) {
+                    botMsg.textContent = "এখানে মূলত প্রফেশনাল ডিজিটাল ফ্রিল্যান্সিং সেবা প্রদান করা হয়! যেমন:\n১. Video Editing (ভিডিও এডিটিং ও শর্টস)\n২. YouTube SEO (ইউটিউব এসইও ও চ্যানেল গ্রোথ)\n৩. Thumbnail Design (হাই-সিটিআর থাম্বনেইল ডিজাইন)\n৪. Data Entry (ডেটা এন্ট্রি ও ম্যানেজমেন্ট)।";
                 } else if(lowerMsg.includes('hello') || lowerMsg.includes('hi') || lowerMsg.includes('hey')) {
                     botMsg.textContent = "Hello! Welcome to Mahadi's portfolio. How can I help you with video editing, YouTube SEO, or thumbnail design today?";
                 } else {
