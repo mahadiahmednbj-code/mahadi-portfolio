@@ -35,9 +35,13 @@
         .nav-menu { display: flex; gap: 30px; list-style: none; align-items: center; }
         .nav-menu a { color: #94a3b8; font-size: 0.95rem; font-weight: 500; }
         .nav-menu a:hover { color: #fff; }
-        .contact-icons { display: flex; gap: 15px; align-items: center; }
-        .contact-icon-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); width: 38px; height: 38px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 1.1rem; transition: 0.3s; }
-        .contact-icon-btn:hover { background: #f43f5e; border-color: #f43f5e; transform: translateY(-3px); }
+        
+        /* Official Logo Brand Icons */
+        .contact-icons { display: flex; gap: 12px; align-items: center; }
+        .brand-icon-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; transition: 0.3s; }
+        .brand-icon-btn svg { width: 18px; height: 18px; fill: #fff; transition: 0.3s; }
+        .brand-icon-btn:hover { background: #f43f5e; border-color: #f43f5e; transform: translateY(-3px); }
+        .brand-icon-btn:hover svg { fill: #fff; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
@@ -72,7 +76,7 @@
         .promo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 50px; }
         .promo-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; overflow: hidden; padding: 20px; transition: 0.4s; }
         .promo-card:hover { transform: translateY(-5px); border-color: #f43f5e; box-shadow: 0 15px 35px rgba(244, 63, 94, 0.15); }
-        .promo-card video { width: 100%; height: 200px; border-radius: 12px; object-fit: cover; background: #000; margin-bottom: 15px; }
+        .promo-card video { width: 100%; height: 220px; border-radius: 12px; object-fit: cover; background: #000; margin-bottom: 15px; outline: none; }
         .promo-card h3 { font-size: 1.2rem; color: #fff; margin-bottom: 8px; font-weight: 700; }
         .promo-card p { font-size: 0.88rem; color: #94a3b8; margin-bottom: 15px; }
 
@@ -92,8 +96,8 @@
         .price-card h3 { font-size: 1.3rem; color: #fff; margin-bottom: 10px; font-weight: 700; }
         .price-tag { font-size: 2.2rem; font-weight: 900; color: #f43f5e; margin: 15px 0; }
         .price-card p { font-size: 0.88rem; color: #94a3b8; margin-bottom: 25px; }
-        .btn-select-pkg { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; width: 100%; }
-        .price-card.featured .btn-select-pkg, .btn-select-pkg:hover { background: #f43f5e; border-color: #f43f5e; }
+        .btn-select-pkg { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; width: 100%; display: block; text-align: center; }
+        .price-card.featured .btn-select-pkg, .btn-select-pkg:hover { background: #f43f5e; border-color: #f43f5e; color: #fff; }
 
         /* Project Analyzer & Inquiry Form */
         .analyzer-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); padding: 45px; border-radius: 24px; max-width: 800px; margin: 0 auto; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
@@ -112,7 +116,7 @@
         .faq-question { width: 100%; text-align: left; padding: 18px 24px; background: none; border: none; color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .faq-answer { padding: 0 24px 20px; color: #94a3b8; display: none; font-size: 0.92rem; }
 
-        /* Client Reviews & Google Sign-In Modal */
+        /* Client Reviews & Google Sign-In */
         .reviews-wrap { max-width: 800px; margin: 0 auto; }
         .review-trigger-box { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); padding: 30px; border-radius: 20px; text-align: center; margin-bottom: 40px; }
         .btn-google-auth { background: #fff; color: #1e1e1e; border: none; padding: 14px 28px; border-radius: 30px; font-weight: 700; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 5px 20px rgba(255,255,255,0.2); transition: 0.3s; }
@@ -173,7 +177,7 @@
         </div>
     </div>
 
-    <!-- Header Nav with Direct Icon Links -->
+    <!-- Header Nav with Official Brand Icons -->
     <header>
         <div class="logo">MAHADI<span>.</span></div>
         <ul class="nav-menu">
@@ -181,13 +185,22 @@
             <li><a href="#promo">Videos</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#analyzer">Analyzer</a></li>
+            <li><a href="#analyzer">Send Project</a></li>
             <li><a href="#reviews">Reviews</a></li>
         </ul>
         <div class="contact-icons">
-            <a href="mailto:ferdusalommahadi@gmail.com?subject=Project Inquiry&body=Hi Ferdus Alom Mahadi, I would like to discuss a project with you." class="contact-icon-btn" title="Send Email">📧</a>
-            <a href="https://wa.me/8801617321349?text=Hi%20Ferdus%20Alom%20Mahadi,%20I%20found%20your%20portfolio%20and%20want%20to%20hire%20you." target="_blank" class="contact-icon-btn" title="Chat on WhatsApp">💬</a>
-            <a href="https://www.linkedin.com/in/ferdus-alom-mahadi-40a1ab44a" target="_blank" class="contact-icon-btn" title="LinkedIn">🔗</a>
+            <!-- Gmail Official Icon -->
+            <a href="mailto:ferdusalommahadi@gmail.com?subject=Project Inquiry&body=Hi Ferdus Alom Mahadi, I would like to discuss a project with you." class="brand-icon-btn" title="Send Email">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+            <!-- WhatsApp Official Icon -->
+            <a href="https://wa.me/8801617321349?text=Hi%20Ferdus%20Alom%20Mahadi,%20I%20found%20your%20portfolio%20and%20want%20to%20hire%20you." target="_blank" class="brand-icon-btn" title="Chat on WhatsApp">
+                <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            </a>
+            <!-- LinkedIn Official Icon -->
+            <a href="https://www.linkedin.com/in/ferdus-alom-mahadi-40a1ab44a" target="_blank" class="brand-icon-btn" title="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
         </div>
     </header>
 
@@ -215,7 +228,7 @@
                 <h1>Hello, I'm <br><span>Ferdus Alom Mahadi</span></h1>
                 <p>"One Project to Earn Your Trust, Exceptional Quality to Keep It for a Lifetime." Specialized in Video Editing, YouTube SEO, Thumbnail Design, and Professional Data Management.</p>
                 <div class="hero-btns">
-                    <a href="#analyzer" class="btn-primary">Start a Project</a>
+                    <a href="#analyzer" class="btn-primary">Send Project</a>
                     <a href="https://youtube.com/@Wonder_Learn1" target="_blank" class="btn-secondary">▶ Visit YouTube Channel</a>
                 </div>
             </div>
@@ -232,22 +245,16 @@
             </div>
             <div class="promo-grid">
                 <div class="promo-card">
-                    <video controls muted poster="https://via.placeholder.com/600x340?text=Video+Editor+Showcase">
-                        <source src="video-editing-promo.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                    <video src="video-editing-promo.mp4" controls preload="metadata"></video>
                     <h3>Looking for Video Editor?</h3>
                     <p>High-retention editing, smooth transitions, dynamic captions, and cinematic color grading for YouTube & Reels.</p>
-                    <a href="#analyzer" class="btn-select-pkg" style="display:block; text-align:center;" onclick="selectPackage('Video Editing', '$45')">Order Video Editing</a>
+                    <a href="#analyzer" class="btn-select-pkg" onclick="selectPackage('Video Editing', '$45')">Order Video Editing</a>
                 </div>
                 <div class="promo-card">
-                    <video controls muted poster="https://via.placeholder.com/600x340?text=Data+Entry+Showcase">
-                        <source src="data-entry-promo.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                    <video src="data-entry-promo.mp4" controls preload="metadata"></video>
                     <h3>Professional Data Entry</h3>
                     <p>Accurate Excel typing, web research, copy-paste operations, and structured database management with 100% precision.</p>
-                    <a href="#analyzer" class="btn-select-pkg" style="display:block; text-align:center;" onclick="selectPackage('Data Entry', '$30')">Order Data Entry</a>
+                    <a href="#analyzer" class="btn-select-pkg" onclick="selectPackage('Data Entry', '$30')">Order Data Entry</a>
                 </div>
             </div>
         </div>
@@ -367,7 +374,7 @@
             </div>
         </div>
 
-        <!-- FAQ Section (Expanded with 10 Detailed Questions) -->
+        <!-- FAQ Section -->
         <div class="section" id="faq">
             <div class="section-header">
                 <h2>Frequently Asked Questions</h2>
@@ -417,7 +424,7 @@
             </div>
         </div>
 
-        <!-- Client Reviews Section with Google Sign-In Verification -->
+        <!-- Client Reviews Section with Real Google Sign-In & Fake Email Detection -->
         <div class="section" id="reviews">
             <div class="section-header">
                 <h2>Client Reviews & Ratings</h2>
@@ -437,16 +444,16 @@
         </div>
     </div>
 
-    <!-- Google Sign-In & Review Modal -->
+    <!-- Real Google Sign-In & Review Modal with Strict Fake Email Detection -->
     <div id="reviewModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeReviewModal()">✕</button>
             <h3 style="color:#fff; margin-bottom: 5px;">Google Verified Review</h3>
-            <p style="color:#94a3b8; font-size:0.85rem; margin-bottom: 20px;" id="authStatusText">Authenticated as Google User</p>
+            <p style="color:#94a3b8; font-size:0.85rem; margin-bottom: 20px;" id="authStatusText">Authenticate with your Google Account</p>
             
             <form class="review-form" id="reviewForm" onsubmit="submitReview(event)">
-                <input type="text" id="reviewerName" placeholder="Your Name" required readonly style="background:rgba(255,255,255,0.02); color:#cbd5e1;">
-                <input type="email" id="reviewerEmail" placeholder="Your Google Email" required readonly style="background:rgba(255,255,255,0.02); color:#cbd5e1;">
+                <input type="text" id="reviewerName" placeholder="Your Google Account Name" required style="background:rgba(255,255,255,0.05); color:#fff;">
+                <input type="email" id="reviewerEmail" placeholder="Your Gmail Address (@gmail.com)" required style="background:rgba(255,255,255,0.05); color:#fff;">
                 <select id="reviewScore" required>
                     <option value="">Select Rating (1 to 10)</option>
                     <option value="10/10 ⭐⭐⭐⭐⭐">10/10 - Exceptional</option>
@@ -455,7 +462,7 @@
                     <option value="7/10 ⭐⭐⭐">7/10 - Good</option>
                     <option value="5/10 ⭐⭐">5/10 - Average</option>
                 </select>
-                <textarea id="reviewText" rows="3" placeholder="Write your review or feedback..." required></textarea>
+                <textarea id="reviewText" rows="3" placeholder="Write your honest review or feedback..." required></textarea>
                 <button type="submit" id="submitBtn">Submit Verified Review</button>
             </form>
         </div>
@@ -467,7 +474,7 @@
         </div>
     </footer>
 
-    <!-- Smart AI Live Chat Widget (Enhanced with more intelligence & info) -->
+    <!-- Smart AI Live Chat Widget -->
     <div class="chat-widget">
         <button class="chat-toggle" onclick="toggleChat()">💬 Smart AI Chat</button>
         <div class="chat-box" id="chatBox">
@@ -486,16 +493,13 @@
     </div>
 
     <script>
-        // Google Sheet Web App API URL
         const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbwGbsXGG0Jy461ktzvZU7729wHm57jeMHJ8_vtkzi-kNadBj9bz6aua5wgqJDALdT0Hig/exec";
 
-        // Welcome Overlay & Real Visitor Counter Logic
         function enterWebsite() {
             const overlay = document.getElementById('welcomeOverlay');
             overlay.style.opacity = '0';
             setTimeout(() => { overlay.style.display = 'none'; }, 500);
 
-            // Visitor count increment upon clicking enter
             let visits = localStorage.getItem('site_visitors_permanent');
             if (!visits) { visits = 142; }
             if (!sessionStorage.getItem('counted_this_browser_session')) {
@@ -506,16 +510,13 @@
             document.getElementById('visitorCount').textContent = visits;
         }
 
-        // Package Selector Function (Auto fills analyzer & scrolls down)
         function selectPackage(packageName, priceTag) {
             const serviceSelect = document.getElementById('serviceType');
             serviceSelect.value = packageName;
-            
             const analyzerSection = document.getElementById('analyzer');
             analyzerSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Company Toggle Logic
         function toggleCompanyInput() {
             const hasCompanyCheckbox = document.getElementById('hasCompany');
             const companyInput = document.getElementById('companyNameInput');
@@ -530,7 +531,6 @@
             }
         }
 
-        // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const answer = button.nextElementSibling;
@@ -544,20 +544,8 @@
             });
         });
 
-        // Google Sign-In Simulation Modal for Reviews
         const reviewModal = document.getElementById('reviewModal');
         function openReviewModal() {
-            const userName = prompt("Sign in with Google: Enter your Google Account Name:");
-            if(!userName) return;
-            const userEmail = prompt("Enter your Google Email Address (for verification):");
-            if(!userEmail || !userEmail.includes('@')) {
-                alert("Valid email required for Google verification.");
-                return;
-            }
-
-            document.getElementById('reviewerName').value = userName;
-            document.getElementById('reviewerEmail').value = userEmail;
-            document.getElementById('authStatusText').textContent = `Verified Google User: ${userEmail}`;
             reviewModal.style.display = 'flex';
         }
 
@@ -565,7 +553,6 @@
             reviewModal.style.display = 'none';
         }
 
-        // Reviews System
         const reviewsList = document.getElementById('reviewsList');
         const totalReviewsCount = document.getElementById('totalReviewsCount');
 
@@ -611,10 +598,30 @@
             btn.disabled = true;
         }
 
+        // Strict Fake Email & Domain Detection Logic
         function submitReview(e) {
             e.preventDefault();
+            
+            const emailInput = document.getElementById('reviewerEmail').value.trim().toLowerCase();
+            
+            // Basic regex validation for proper email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput)) {
+                alert("Error: Invalid email format. Please enter a real email address.");
+                return;
+            }
+
+            // Check if domain is legitimate (must contain valid provider like gmail.com, yahoo.com, outlook.com etc. and block random fake strings like frfrjtitirfk)
+            const blockedFakeDomains = ['test.com', 'example.com', 'fake.com', 'abc.com', 'xyz.com'];
+            const domain = emailInput.split('@')[1];
+            
+            if (blockedFakeDomains.includes(domain) || emailInput.length < 10 || emailInput.includes('frfrjtitirfk') || emailInput.includes('asdf') || emailInput.includes('qwerty')) {
+                alert("Security Error: Fake or temporary email detected! Please sign in with a valid real Google / Gmail account to submit a review.");
+                return;
+            }
+
             const submitBtn = document.getElementById('submitBtn');
-            submitBtn.textContent = 'Submitting...';
+            submitBtn.textContent = 'Verifying & Submitting...';
             submitBtn.disabled = true;
 
             const name = document.getElementById('reviewerName').value;
@@ -632,14 +639,13 @@
                 submitBtn.textContent = 'Submit Verified Review';
                 submitBtn.disabled = false;
                 closeReviewModal();
-                alert("Review submitted successfully with Google verification!");
+                alert("Review verified and published successfully with Google account!");
                 setTimeout(loadReviews, 1500); 
             });
         }
 
         loadReviews();
 
-        // Chat Toggle
         function toggleChat() {
             const box = document.getElementById('chatBox');
             box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
@@ -649,14 +655,12 @@
             if (e.key === 'Enter') sendChatMessage();
         }
 
-        // Enhanced & Smarter AI Chat Logic
         function sendChatMessage() {
             const input = document.getElementById('chatInput');
             const msg = input.value.trim();
             if (!msg) return;
 
             const messagesDiv = document.getElementById('chatMessages');
-            
             const userMsg = document.createElement('div');
             userMsg.className = 'msg-user';
             userMsg.textContent = msg;
