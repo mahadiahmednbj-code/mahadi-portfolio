@@ -439,7 +439,7 @@ footer { text-align: center; padding: 40px 0; color: #64748b; font-size: 0.9rem;
       </div>
       <div class="faq-item">
         <button class="faq-question">6. How do I leave a verified review? <span>+</span></button>
-        <div class="faq-answer">You can sign in securely with your Google account via Firebase redirect in the Reviews section below to submit genuine feedback.</div>
+        <div class="faq-answer">You can sign in securely with your Google account via Firebase popup in the Reviews section below to submit genuine feedback.</div>
       </div>
     </div>
   </div>
@@ -468,7 +468,7 @@ footer { text-align: center; padding: 40px 0; color: #64748b; font-size: 0.9rem;
   <div class="modal-content">
     <button class="modal-close" onclick="closeReviewModal()">X</button>
     <h3 style="color:#fff; margin-bottom: 5px;">Google Verified Review</h3>
-    <p style="color:#94a3b8; font-size:0.85rem; margin-bottom: 20px;">Authenticated via Firebase Redirect</p>
+    <p style="color:#94a3b8; font-size:0.85rem; margin-bottom: 20px;">Authenticated via Firebase Popup</p>
     <form class="review-form" id="reviewForm" onsubmit="submitReview(event)">
       <input type="text" id="reviewerName" placeholder="Your Name" readonly required style="background:rgba(255,255,255,0.05); color:#94a3b8;">
       <input type="email" id="reviewerEmail" placeholder="Your Gmail" readonly required style="background:rgba(255,255,255,0.05); color:#94a3b8;">
@@ -523,8 +523,9 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-// Your Google Sheet Apps Script URL
-const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycby3CJiW1dUVginHMGaysJFk-u2ohEwVcyrsSRRH_ZXyN2WyK9IgOK4Kqr_YG8AyFcaUFg/exec";
+// Separate APIs for Reviews and Visitor Counter
+const REVIEW_SHEET_API = "https://script.google.com/macros/s/AKfycbyQU5gJ-KaMxnEUOPFr8vx7QvP8lltvaa7gGF0aDWOaYMaWnb1nXmtIoprBjfvKVYDnZA/exec";
+const VISITOR_SHEET_API = "https://script.google.com/macros/s/AKfycbwp9TdqTKN8LZL5-5tvUO0f_Ea3i7vX4EV0fAzSKfI205pIETskGVSUUSRngZSi16uhOQ/exec";
 
 // Welcome Overlay Logic
 function enterWebsite() {
@@ -533,10 +534,10 @@ function enterWebsite() {
   setTimeout(() => { overlay.style.display = 'none'; }, 500);
 }
 
-// Public & Permanent Visitor Counter Logic using Google Sheet
+// Public & Permanent Visitor Counter Logic
 function updateVisitorCount() {
   let counted = sessionStorage.getItem('public_visitor_counted');
-  let url = GOOGLE_SHEET_API;
+  let url = VISITOR_SHEET_API;
   
   if (!counted) {
     url += "?action=increment";
@@ -591,40 +592,34 @@ document.querySelectorAll('.faq-question').forEach(button => {
   });
 });
 
-// Firebase Google Login with signInWithRedirect
+// Firebase Google Login with Popup
 const reviewModal = document.getElementById('reviewModal');
 
 function loginWithFirebaseGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithRedirect(provider);
-}
-
-// Check redirect result when page loads after login
-window.addEventListener('DOMContentLoaded', () => {
-  firebase.auth().getRedirectResult()
+  firebase.auth().signInWithPopup(provider)
     .then((result) => {
-      if (result.user) {
-        document.getElementById('reviewerName').value = result.user.displayName || 'Google User';
-        document.getElementById('reviewerEmail').value = result.user.email || '';
-        reviewModal.style.display = 'flex';
-      }
+      const user = result.user;
+      document.getElementById('reviewerName').value = user.displayName || 'Google User';
+      document.getElementById('reviewerEmail').value = user.email || '';
+      reviewModal.style.display = 'flex';
     })
     .catch((error) => {
-      console.error("Redirect Sign-In Error: ", error);
+      alert("Google Sign-In Failed: " + error.message);
     });
-});
+}
 
 function closeReviewModal() {
   reviewModal.style.display = 'none';
 }
 
-// Load and Submit Reviews
+// Load and Submit Reviews using Review Sheet API
 const reviewsList = document.getElementById('reviewsList');
 const totalReviewsCount = document.getElementById('totalReviewsCount');
 
 function loadReviews() {
   reviewsList.innerHTML = '<p style="color:#64748b; text-align:center; font-size:0.9rem;">Loading reviews...</p>';
-  fetch(GOOGLE_SHEET_API + "?action=getReviews")
+  fetch(REVIEW_SHEET_API)
     .then(res => res.json())
     .then(saved => {
       totalReviewsCount.textContent = saved.length;
@@ -675,7 +670,7 @@ function submitReview(e) {
   const score = document.getElementById('reviewScore').value;
   const text = document.getElementById('reviewText').value;
 
-  fetch(GOOGLE_SHEET_API, {
+  fetch(REVIEW_SHEET_API, {
     method: 'POST',
     mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
