@@ -206,7 +206,7 @@ footer { text-align: center; padding: 40px 0; color: #64748b; font-size: 0.9rem;
   <!-- Live Counter Stats Bar -->
   <div class="stats-bar">
     <div class="stat-box">
-      <h3 id="visitorCount">142</h3>
+      <h3 id="visitorCount">150</h3>
       <p>Website Visitors</p>
     </div>
     <div class="stat-box">
@@ -511,9 +511,9 @@ footer { text-align: center; padding: 40px 0; color: #64748b; font-size: 0.9rem;
 </div>
 
 <script>
-// Firebase Initialization with your Config
+// Firebase Initialization
 const firebaseConfig = {
-  apiKey: "AIzaSyAgst0A5xYhhVbyHsULT4R0n4W6IghzhbE",
+  apiKey: "AIzaSyAgst0A5xYhhVbYHsULt4R0n4W6IghzbhE",
   authDomain: "mahadi-portfolio-7a6f9.firebaseapp.com",
   projectId: "mahadi-portfolio-7a6f9",
   storageBucket: "mahadi-portfolio-7a6f9.firebasestorage.app",
@@ -523,23 +523,38 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbwGbsXGG0Jy461ktzvZU7729wHm57jeMHJ8_vtkzi-kNadBj9bz6aua5wgqJDALdT0Hig/exec";
+// Your Google Sheet Apps Script URL
+const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycby3CJiW1dUVginHMGaysJFk-u2ohEwVcyrsSRRH_ZXyN2WyK9IgOK4Kqr_YG8AyFcaUFg/exec";
 
-// Welcome Overlay & Real Visitor Counter Logic
+// Welcome Overlay Logic
 function enterWebsite() {
   const overlay = document.getElementById('welcomeOverlay');
   overlay.style.opacity = '0';
   setTimeout(() => { overlay.style.display = 'none'; }, 500);
 }
 
-let visits = localStorage.getItem('site_visitors_permanent');
-if (!visits) { visits = 142; }
-if (!sessionStorage.getItem('counted_this_browser_session')) {
-  visits = parseInt(visits) + 1;
-  localStorage.setItem('site_visitors_permanent', visits);
-  sessionStorage.setItem('counted_this_browser_session', 'true');
+// Public & Permanent Visitor Counter Logic using Google Sheet
+function updateVisitorCount() {
+  let counted = sessionStorage.getItem('public_visitor_counted');
+  let url = GOOGLE_SHEET_API;
+  
+  if (!counted) {
+    url += "?action=increment";
+    sessionStorage.setItem('public_visitor_counted', 'true');
+  }
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      if(data.count) {
+        document.getElementById('visitorCount').textContent = data.count;
+      }
+    })
+    .catch(err => {
+      console.error("Visitor count error:", err);
+    });
 }
-document.getElementById('visitorCount').textContent = visits;
+updateVisitorCount();
 
 // Package Selector Function
 function selectPackage(serviceName, packageName) {
@@ -609,7 +624,7 @@ const totalReviewsCount = document.getElementById('totalReviewsCount');
 
 function loadReviews() {
   reviewsList.innerHTML = '<p style="color:#64748b; text-align:center; font-size:0.9rem;">Loading reviews...</p>';
-  fetch(GOOGLE_SHEET_API)
+  fetch(GOOGLE_SHEET_API + "?action=getReviews")
     .then(res => res.json())
     .then(saved => {
       totalReviewsCount.textContent = saved.length;
