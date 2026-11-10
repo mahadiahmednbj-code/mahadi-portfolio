@@ -10,6 +10,11 @@
 <meta name="description" content="Ferdus Alom Mahadi Professional Video Editor, YouTube SEO Specialist, Data Entry Expert based in Bangladesh.">
 <meta name="keywords" content="Ferdus Alom Mahadi, Video Editing, YouTube SEO, Data Entry, Freelancer Bangladesh">
 <meta name="author" content="Ferdus Alom Mahadi">
+
+<!-- Firebase SDKs (Compat Version for easy CDN integration) -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
 body { background-color: #0c0a10; color: #e2e8f0; line-height: 1.6; overflow-x: hidden; }
@@ -381,8 +386,8 @@ footer { text-align: center; padding: 40px 0; color: #64748b; font-size: 0.9rem;
           <option value="Standard Package ($45)">Video Editing: Standard Package ($45)</option>
           <option value="Premium Package ($90)">Video Editing: Premium Package ($90)</option>
           <option value="Data Entry Basic ($10)">Data Entry: Basic Package ($10)</option>
-          <option value="Data Entry Standard ($30)">Data Entry: Standard Package ($30)</option>
-          <option value="Data Entry Premium ($70)">Data Entry: Premium Package ($70)</option>
+          <option value="Data Entry Standard ($30)">Data Entry: Data Entry Standard ($30)</option>
+          <option value="Data Entry Premium ($70)">Data Entry: Data Entry Premium ($70)</option>
           <option value="Custom Project Work">Request Custom Work / Other Tasks</option>
         </select>
 
@@ -434,7 +439,7 @@ footer { text-align: center; padding: 40px 0; color: #64748b; font-size: 0.9rem;
       </div>
       <div class="faq-item">
         <button class="faq-question">6. How do I leave a verified review? <span>+</span></button>
-        <div class="faq-answer">You can sign in securely with your Google account in the Reviews section below to submit genuine feedback.</div>
+        <div class="faq-answer">You can sign in securely with your Google account via Firebase in the Reviews section below to submit genuine feedback.</div>
       </div>
     </div>
   </div>
@@ -447,10 +452,10 @@ footer { text-align: center; padding: 40px 0; color: #64748b; font-size: 0.9rem;
     </div>
     <div class="reviews-wrap">
       <div class="review-trigger-box">
-        <p style="color:#94a3b8; margin-bottom: 15px; font-size:0.95rem;">Have you worked with Mahadi? Sign in to share your experience.</p>
-        <button class="btn-google-auth" onclick="openReviewModal()">
+        <p style="color:#94a3b8; margin-bottom: 15px; font-size:0.95rem;">Have you worked with Mahadi? Sign in with Google to share your experience.</p>
+        <button class="btn-google-auth" onclick="loginWithFirebaseGoogle()">
           <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-8.87z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.18v3.14C3.17 21.36 7.23 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.39-1.49-.39-2.24s.14-1.52.39-2.24V6.62H1.18C.43 8.13 0 9.82 0 12s.43 3.87 1.18 5.38l4.09-3.14z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.64 1.18 6.62l4.09 3.14c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
-          Sign in with Google to Review
+          Sign in with Google
         </button>
       </div>
       <div class="reviews-list" id="reviewsList"></div>
@@ -463,10 +468,10 @@ footer { text-align: center; padding: 40px 0; color: #64748b; font-size: 0.9rem;
   <div class="modal-content">
     <button class="modal-close" onclick="closeReviewModal()">X</button>
     <h3 style="color:#fff; margin-bottom: 5px;">Google Verified Review</h3>
-    <p style="color:#94a3b8; font-size:0.85rem; margin-bottom: 20px;">Connected via Google Account</p>
+    <p style="color:#94a3b8; font-size:0.85rem; margin-bottom: 20px;">Authenticated via Firebase Google Auth</p>
     <form class="review-form" id="reviewForm" onsubmit="submitReview(event)">
-      <input type="text" id="reviewerName" placeholder="Your Name" required style="background:rgba(255,255,255,0.05);">
-      <input type="email" id="reviewerEmail" placeholder="Your Gmail (@gmail.com)" required style="background:rgba(255,255,255,0.05);">
+      <input type="text" id="reviewerName" placeholder="Your Name" readonly required style="background:rgba(255,255,255,0.05); color:#94a3b8;">
+      <input type="email" id="reviewerEmail" placeholder="Your Gmail" readonly required style="background:rgba(255,255,255,0.05); color:#94a3b8;">
       <select id="reviewScore" required>
         <option value="">Select Rating (1 to 10)</option>
         <option value="10/10 ⭐⭐⭐⭐⭐">10/10 - Exceptional</option>
@@ -506,6 +511,18 @@ footer { text-align: center; padding: 40px 0; color: #64748b; font-size: 0.9rem;
 </div>
 
 <script>
+// Firebase Initialization with your Config
+const firebaseConfig = {
+  apiKey: "AIzaSyAgst0A5xYhhVbyHsULT4R0n4W6IghzhbE",
+  authDomain: "mahadi-portfolio-7a6f9.firebaseapp.com",
+  projectId: "mahadi-portfolio-7a6f9",
+  storageBucket: "mahadi-portfolio-7a6f9.firebasestorage.app",
+  messagingSenderId: "571877895866",
+  appId: "1:571877895866:web:2dc37470544ea8c3179c83",
+  measurementId: "G-Y4E8C7Y7X6"
+};
+firebase.initializeApp(firebaseConfig);
+
 const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbwGbsXGG0Jy461ktzvZU7729wHm57jeMHJ8_vtkzi-kNadBj9bz6aua5wgqJDALdT0Hig/exec";
 
 // Welcome Overlay & Real Visitor Counter Logic
@@ -524,7 +541,7 @@ if (!sessionStorage.getItem('counted_this_browser_session')) {
 }
 document.getElementById('visitorCount').textContent = visits;
 
-// Package Selector Function (Auto fills service & package and scrolls down)
+// Package Selector Function
 function selectPackage(serviceName, packageName) {
   document.getElementById('serviceType').value = serviceName;
   document.getElementById('packageType').value = packageName;
@@ -559,11 +576,23 @@ document.querySelectorAll('.faq-question').forEach(button => {
   });
 });
 
-// Review Modal Handling
+// Firebase Google Login & Modal Handling
 const reviewModal = document.getElementById('reviewModal');
-function openReviewModal() {
-  reviewModal.style.display = 'flex';
+
+function loginWithFirebaseGoogle() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      const user = result.user;
+      document.getElementById('reviewerName').value = user.displayName || 'Google User';
+      document.getElementById('reviewerEmail').value = user.email || '';
+      reviewModal.style.display = 'flex';
+    })
+    .catch((error) => {
+      alert("Google Sign-In Failed: " + error.message);
+    });
 }
+
 function closeReviewModal() {
   reviewModal.style.display = 'none';
 }
@@ -616,21 +645,12 @@ function markHelpful(btn) {
 
 function submitReview(e) {
   e.preventDefault();
-  const nameInput = document.getElementById('reviewerName').value.trim();
-  const emailInput = document.getElementById('reviewerEmail').value.trim().toLowerCase();
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  
-  if (!emailRegex.test(emailInput)) {
-    alert("Error: Please enter a valid email address.");
-    return;
-  }
-
   const submitBtn = document.getElementById('submitBtn');
   submitBtn.textContent = 'Publishing...';
   submitBtn.disabled = true;
 
-  const name = nameInput;
-  const email = emailInput;
+  const name = document.getElementById('reviewerName').value;
+  const email = document.getElementById('reviewerEmail').value;
   const score = document.getElementById('reviewScore').value;
   const text = document.getElementById('reviewText').value;
 
