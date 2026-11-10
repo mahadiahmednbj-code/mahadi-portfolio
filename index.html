@@ -232,7 +232,7 @@
             </div>
         </div>
 
-        <!-- Promotional Videos Showcase Section -->
+        <!-- Promotional Videos Showcase Section (Using correct video filenames) -->
         <div class="section" id="promo">
             <div class="section-header">
                 <h2>Featured Promotional Showcases</h2>
@@ -353,40 +353,35 @@
             </div>
         </div>
 
-        <!-- Project Analyzer & Inquiry Form (Separated Service & Package Selectors) -->
+        <!-- Project Analyzer & Inquiry Form -->
         <div class="section" id="analyzer">
             <div class="section-header">
                 <h2>Project Analyzer & Inquiry</h2>
-                <p>Select your service, package type, and send your details directly to my inbox</p>
+                <p>Select your service, package type, or request a custom project directly</p>
             </div>
             <div class="analyzer-card">
                 <form class="analyzer-form" action="https://formspree.io/f/mbggvrwz" method="POST">
                     <input type="text" id="clientName" name="client_name" placeholder="Your Name" required>
                     <input type="email" id="clientEmail" name="client_email" placeholder="Your Email (for reply)" required>
                     
-                    <!-- Separate Service Select -->
                     <select id="serviceType" name="service_type" required>
                         <option value="">Select Service / Category</option>
                         <option value="Video Editing">Video Editing & Production</option>
                         <option value="Data Entry">Data Entry & Management</option>
                         <option value="YouTube SEO">YouTube SEO & Growth</option>
                         <option value="Thumbnail Design">Thumbnail Design</option>
-                        <option value="Custom Project">Custom Project / Other</option>
+                        <option value="Custom Work">Custom Project / Other Work</option>
                     </select>
 
-                    <!-- Separate Package Select -->
                     <select id="packageType" name="package_type" required>
                         <option value="">Select Package / Custom Option</option>
-                        <!-- Video Packages -->
                         <option value="Basic Package ($15)">Video Editing: Basic Package ($15)</option>
                         <option value="Standard Package ($45)">Video Editing: Standard Package ($45)</option>
                         <option value="Premium Package ($90)">Video Editing: Premium Package ($90)</option>
-                        <!-- Data Entry Packages -->
                         <option value="Data Entry Basic ($10)">Data Entry: Basic Package ($10)</option>
                         <option value="Data Entry Standard ($30)">Data Entry: Standard Package ($30)</option>
                         <option value="Data Entry Premium ($70)">Data Entry: Premium Package ($70)</option>
-                        <!-- Custom Option -->
-                        <option value="Custom Project Work">Custom Project (Tailored Scope)</option>
+                        <option value="Custom Project Work">✨ Request Custom Work / Other Tasks</option>
                     </select>
 
                     <select name="budget_range" required>
@@ -396,7 +391,7 @@
                         <option value="$200+">$200+</option>
                     </select>
                     
-                    <textarea name="project_details" rows="4" placeholder="Describe your project requirements, goals, and timeline..." required></textarea>
+                    <textarea name="project_details" rows="4" placeholder="Describe your project requirements, goals, custom tasks, or timeline..." required></textarea>
                     
                     <label class="checkbox-group">
                         <input type="checkbox" id="hasCompany" onchange="toggleCompanyInput()"> I represent a company / business
@@ -421,11 +416,11 @@
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">2. What services do you offer? <span>+</span></button>
-                    <div class="faq-answer">I offer professional video editing, YouTube SEO, thumbnail design, and accurate data entry management services.</div>
+                    <div class="faq-answer">I offer professional video editing, YouTube SEO, thumbnail design, accurate data entry management, and custom digital services.</div>
                 </div>
                 <div class="faq-item">
-                    <button class="faq-question">3. How does YouTube SEO help my channel grow? <span>+</span></button>
-                    <div class="faq-answer">YouTube SEO optimizes your titles, tags, descriptions, and metadata to increase search visibility and audience retention.</div>
+                    <button class="faq-question">3. Can I request custom work outside these packages? <span>+</span></button>
+                    <div class="faq-answer">Yes! Clients can request custom tasks or tailored projects by selecting "Custom Project / Other Work" in the Project Analyzer form.</div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">4. What is the typical turnaround time for a project? <span>+</span></button>
@@ -433,7 +428,7 @@
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">5. How do the pricing packages work? <span>+</span></button>
-                    <div class="faq-answer">I offer clear tiers for video editing ($15-$90) and data entry ($10-$70) with fixed scopes and revision limits, plus custom project options.</div>
+                    <div class="faq-answer">I offer clear tiers for video editing ($15-$90) and data entry ($10-$70) with fixed scopes, revision limits, and custom options.</div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">6. Can I request custom video editing styles? <span>+</span></button>
@@ -458,7 +453,7 @@
             </div>
         </div>
 
-        <!-- Client Reviews Section -->
+        <!-- Client Reviews Section with Real Google Sign-In -->
         <div class="section" id="reviews">
             <div class="section-header">
                 <h2>Client Reviews & Ratings</h2>
@@ -467,9 +462,9 @@
             <div class="reviews-wrap">
                 <div class="review-trigger-box">
                     <p style="color:#94a3b8; margin-bottom:15px; font-size:0.95rem;">Have you worked with Mahadi? Sign in with Google to leave a verified review.</p>
-                    <button class="btn-google-auth" onclick="openReviewModal()">
+                    <button class="btn-google-auth" onclick="loginWithGoogle()">
                         <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.19v3.15C3.2 21.33 7.22 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.19C.43 8.12 0 9.87 0 11.7s.43 3.58 1.19 5.12l4.09-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.22 0 3.2 2.67 1.19 6.58l4.09 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
-                        Sign in with Google to Review
+                        Sign in with Google
                     </button>
                 </div>
 
@@ -483,11 +478,11 @@
         <div class="modal-content">
             <button class="modal-close" onclick="closeReviewModal()">✕</button>
             <h3 style="color:#fff; margin-bottom: 5px;">Google Verified Review</h3>
-            <p style="color:#94a3b8; font-size:0.85rem; margin-bottom: 20px;">Connected via Google Account</p>
+            <p style="color:#94a3b8; font-size:0.85rem; margin-bottom: 20px;" id="authStatusText">Signed in with Google</p>
             
             <form class="review-form" id="reviewForm" onsubmit="submitReview(event)">
-                <input type="text" id="reviewerName" placeholder="Your Name" required style="background:rgba(255,255,255,0.05); color:#fff;">
-                <input type="email" id="reviewerEmail" placeholder="Your Gmail (@gmail.com)" required style="background:rgba(255,255,255,0.05); color:#fff;">
+                <input type="text" id="reviewerName" placeholder="Your Name" required readonly style="background:rgba(255,255,255,0.05); color:#fff; cursor:not-allowed;">
+                <input type="email" id="reviewerEmail" placeholder="Your Gmail" required readonly style="background:rgba(255,255,255,0.05); color:#fff; cursor:not-allowed;">
                 <select id="reviewScore" required>
                     <option value="">Select Rating (1 to 10)</option>
                     <option value="10/10 ⭐⭐⭐⭐⭐">10/10 - Exceptional</option>
@@ -517,7 +512,7 @@
                 <span style="cursor:pointer;" onclick="toggleChat()">✕</span>
             </div>
             <div class="chat-messages" id="chatMessages">
-                <div class="msg-bot">Hello! I am Ferdus Alom Mahadi's AI Assistant. Ask me about video editing, data entry packages, or contact info!</div>
+                <div class="msg-bot">Hello! I am Ferdus Alom Mahadi's AI Assistant. Ask me about video editing, data entry, custom work, or contact info!</div>
             </div>
             <div class="chat-input-area">
                 <input type="text" id="chatInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
@@ -525,6 +520,40 @@
             </div>
         </div>
     </div>
+
+    <!-- Firebase SDK Scripts -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAgst0A5XyhhVbYhSULT4R8nW46IghzbnE",
+            authDomain: "mahadi-portfolio-7a6f9.firebaseapp.com",
+            projectId: "mahadi-portfolio-7a6f9",
+            storageBucket: "mahadi-portfolio-7a6f9.firebasestorage.app",
+            messagingSenderId: "571877895866",
+            appId: "1:571877895866:web:2dc374785444a8c3179c83",
+            measurementId: "G-Y4E0C7Y7X6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        window.loginWithGoogle = function() {
+            signInWithPopup(auth, provider)
+              .then((result) => {
+                const user = result.user;
+                document.getElementById('reviewerName').value = user.displayName;
+                document.getElementById('reviewerEmail').value = user.email;
+                document.getElementById('authStatusText').textContent = "Google Verified: " + user.email;
+                document.getElementById('reviewModal').style.display = 'flex';
+              }).catch((error) => {
+                console.error(error);
+                alert("Google Sign-In Failed. Please make sure Google provider is enabled in Firebase Console.");
+              });
+        };
+    </script>
 
     <script>
         const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbwGbsXGG0Jy461ktzvZU7729wHm57jeMHJ8_vtkzi-kNadBj9bz6aua5wgqJDALdT0Hig/exec";
@@ -578,10 +607,6 @@
         });
 
         const reviewModal = document.getElementById('reviewModal');
-        function openReviewModal() {
-            reviewModal.style.display = 'flex';
-        }
-
         function closeReviewModal() {
             reviewModal.style.display = 'none';
         }
@@ -633,31 +658,14 @@
 
         function submitReview(e) {
             e.preventDefault();
-            const nameInput = document.getElementById('reviewerName').value.trim();
-            const emailInput = document.getElementById('reviewerEmail').value.trim().toLowerCase();
-            
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(emailInput)) {
-                alert("Error: Please enter a valid email address.");
-                return;
-            }
-
-            const blockedFakeDomains = ['test.com', 'example.com', 'fake.com', 'abc.com', 'xyz.com'];
-            const domain = emailInput.split('@')[1];
-            
-            if (blockedFakeDomains.includes(domain) || emailInput.length < 10 || emailInput.includes('frfrjtitirfk') || emailInput.includes('asdf') || emailInput.includes('qwerty') || nameInput.length < 2) {
-                alert("Security Error: Invalid or temporary fake account detected! Please enter your real Google account name and Gmail address.");
-                return;
-            }
+            const name = document.getElementById('reviewerName').value;
+            const email = document.getElementById('reviewerEmail').value;
+            const score = document.getElementById('reviewScore').value;
+            const text = document.getElementById('reviewText').value;
 
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.textContent = 'Publishing...';
             submitBtn.disabled = true;
-
-            const name = nameInput;
-            const email = emailInput;
-            const score = document.getElementById('reviewScore').value;
-            const text = document.getElementById('reviewText').value;
 
             fetch(GOOGLE_SHEET_API, {
                 method: 'POST',
@@ -705,15 +713,17 @@
                 
                 const lowerMsg = msg.toLowerCase();
                 if(lowerMsg.includes('price') || lowerMsg.includes('cost') || lowerMsg.includes('budget') || lowerMsg.includes('rate') || lowerMsg.includes('package')) {
-                    botMsg.textContent = "We offer Video Editing packages ($15-$90) and Data Entry packages ($10-$70) with fixed scopes and custom project options!";
+                    botMsg.textContent = "We offer Video Editing packages ($15-$90), Data Entry packages ($10-$70), and custom project options!";
                 } else if(lowerMsg.includes('edit') || lowerMsg.includes('video') || lowerMsg.includes('shorts')) {
                     botMsg.textContent = "Ferdus Alom Mahadi specializes in high-retention video editing, YouTube SEO, and thumbnail designs.";
                 } else if(lowerMsg.includes('data') || lowerMsg.includes('entry') || lowerMsg.includes('excel')) {
                     botMsg.textContent = "Professional data entry includes Excel typing, web research, and database management with 100% precision.";
+                } else if(lowerMsg.includes('custom') || lowerMsg.includes('other')) {
+                    botMsg.textContent = "Yes, you can request any custom work or tailored tasks outside standard packages by selecting 'Custom Project Work' in the form!";
                 } else if(lowerMsg.includes('contact') || lowerMsg.includes('whatsapp') || lowerMsg.includes('email')) {
                     botMsg.textContent = "You can contact Mahadi directly via WhatsApp at 01617321349 or email at ferdusalommahadi@gmail.com!";
                 } else {
-                    botMsg.textContent = "For custom projects, please fill out our Project Analyzer form or contact Mahadi via WhatsApp!";
+                    botMsg.textContent = "For custom projects or inquiries, please fill out our Project Analyzer form or contact Mahadi via WhatsApp!";
                 }
                 
                 messagesDiv.appendChild(botMsg);
