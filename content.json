@@ -1,0 +1,14 @@
+{
+ "reviews": [],
+ "theme": {
+  "c1": "#f43f5e",
+  "c3": "#8b5cf6",
+  "bg": "#0a0810",
+  "font": "modern",
+  "rad": "20",
+  "grid": "on"
+ },
+ "texts": {},
+ "cfg": {},
+ "hide": {}
+}
